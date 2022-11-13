@@ -1,18 +1,29 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PrescriptionProcessing.Data;
+using PrescriptionProcessing.Models;
+using PrescriptionProcessing.Repository;
 
 namespace PrescriptionProcessing.Controllers
 {
     public class EmployeeController : Controller
     {
+        private EmployeeRepository _employeeRepository;
+
+        public EmployeeController(ApplicationDbContext dbcontext)
+        {
+            _employeeRepository = new EmployeeRepository(dbcontext);
+        }
+
         // GET: EmployeeController
         public ActionResult Index()
         {
-            return View();
+            var list = _employeeRepository.GetAllEmployees();
+            return View(list);
         }
 
         // GET: EmployeeController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(Guid id)
         {
             return View();
         }
@@ -20,7 +31,7 @@ namespace PrescriptionProcessing.Controllers
         // GET: EmployeeController/Create
         public ActionResult Create()
         {
-            return View();
+            return View("CreateEmployee");
         }
 
         // POST: EmployeeController/Create
@@ -30,27 +41,44 @@ namespace PrescriptionProcessing.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var model = new EmployeeModel();
+                var task = TryUpdateModelAsync(model);
+                task.Wait();
+                if(task.Result)
+                {
+                    _employeeRepository.InsertEmployee(model);
+                }
+
+                return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View("CreateEmployee");
             }
+            
         }
 
         // GET: EmployeeController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Guid id)
         {
-            return View();
+            var model = _employeeRepository.GetEmployeeById(id);
+            return View("EditEmployee",model);
         }
 
         // POST: EmployeeController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Guid id, IFormCollection collection)
         {
             try
             {
+                var model = new EmployeeModel();
+                var task = TryUpdateModelAsync(model);
+                task.Wait();
+                if(task.Result)
+                {
+                    _employeeRepository.UpdateEmployee(model);
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -60,23 +88,25 @@ namespace PrescriptionProcessing.Controllers
         }
 
         // GET: EmployeeController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
-            return View();
+            var model = _employeeRepository.GetEmployeeById(id);
+            return View("DeleteEmployee",model);
         }
 
         // POST: EmployeeController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(Guid id, IFormCollection collection)
         {
             try
-            {
-                return RedirectToAction(nameof(Index));
+            {           
+             _employeeRepository.DeleteEmployee(id);                
+             return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return RedirectToAction("DeleteEmployee",id);
             }
         }
     }

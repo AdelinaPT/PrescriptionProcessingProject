@@ -86,7 +86,6 @@ namespace PrescriptionProcessing.Repository
             if (dbobject != null)
             {
                 _DBContext.Employees.Remove(dbobject);
-
                 _DBContext.SaveChanges();
             }
         }
