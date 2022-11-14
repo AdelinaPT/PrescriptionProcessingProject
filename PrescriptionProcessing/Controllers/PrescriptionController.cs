@@ -1,26 +1,36 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PrescriptionProcessing.Data;
+using PrescriptionProcessing.Models;
+using PrescriptionProcessing.Repository;
 
 namespace PrescriptionProcessing.Controllers
 {
     public class PrescriptionController : Controller
     {
+        private PrescriptionRepository _prescriptionRepository;
+        public PrescriptionController(ApplicationDbContext dbcontext)
+        {
+            _prescriptionRepository = new PrescriptionRepository(dbcontext);
+        }
         // GET: PrescriptionController
         public ActionResult Index()
         {
-            return View();
+            var list = _prescriptionRepository.GetAllPrescriptions();
+            return View(list);
         }
 
         // GET: PrescriptionController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(Guid id)
         {
-            return View();
+            var model = _prescriptionRepository.GetPrescriptionById(id);
+            return View("PrescriptionDetails", model);
         }
 
         // GET: PrescriptionController/Create
         public ActionResult Create()
         {
-            return View();
+            return View("CreatePrescription");
         }
 
         // POST: PrescriptionController/Create
@@ -30,53 +40,70 @@ namespace PrescriptionProcessing.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var model = new PrescriptionModel();
+                var task = TryUpdateModelAsync(model);
+                task.Wait();
+                if(task.Result)
+                {
+                    _prescriptionRepository.InsertPrescription(model);
+                }
+                return RedirectToAction("Index");
             }
-            catch
+            catch(Exception error)
             {
-                return View();
+                return View("CreatePrescription");
             }
         }
 
         // GET: PrescriptionController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Guid id)
         {
-            return View();
+            var model = _prescriptionRepository.GetPrescriptionById(id);
+            return View("EditPrescription",model);
         }
 
         // POST: PrescriptionController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Guid id, IFormCollection collection)
         {
             try
             {
+                var model = new PrescriptionModel();
+                var task = TryUpdateModelAsync(model);
+                task.Wait();
+                if(task.Result)
+                {
+                    _prescriptionRepository.UpdatePrescription(model);
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return RedirectToAction("Edit",id);
             }
         }
 
         // GET: PrescriptionController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
-            return View();
+            var model = _prescriptionRepository.GetPrescriptionById(id);
+            return View("DeletePrescription",model);
         }
 
         // POST: PrescriptionController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(Guid id, IFormCollection collection)
         {
             try
             {
+                _prescriptionRepository.DeletePrescription(id);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return RedirectToAction("Delete",id);
             }
         }
     }

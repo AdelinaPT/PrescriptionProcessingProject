@@ -183,18 +183,6 @@ namespace PrescriptionProcessing.Data
                 entity.Property(e => e.Status)
                     .HasMaxLength(50)
                     .IsUnicode(false);
-
-                entity.HasOne(d => d.IdEmployeeNavigation)
-                    .WithMany(p => p.Prescriptions)
-                    .HasForeignKey(d => d.IdEmployee)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Prescription_ToTEmployee");
-
-                entity.HasOne(d => d.IdOrderNavigation)
-                    .WithMany(p => p.Prescriptions)
-                    .HasForeignKey(d => d.IdOrder)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Prescription_ToOrder");
             });
 
             modelBuilder.Entity<Product>(entity =>

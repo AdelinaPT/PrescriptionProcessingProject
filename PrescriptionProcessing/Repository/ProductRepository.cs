@@ -27,6 +27,7 @@ namespace PrescriptionProcessing.Repository
                 model.ActiveIngredients = dbobject.ActiveIngredients;
                 model.PriceUnit = dbobject.PriceUnit;
                 model.Stock = dbobject.Stock;
+                model.Bbd = dbobject.Bbd;
 
             }
             return model;
@@ -42,6 +43,7 @@ namespace PrescriptionProcessing.Repository
                 dbobject.ActiveIngredients = model.ActiveIngredients;
                 dbobject.PriceUnit = model.PriceUnit;
                 dbobject.Stock = model.Stock;
+                dbobject.Bbd = model.Bbd;
 
             }
             return dbobject;
@@ -70,9 +72,9 @@ namespace PrescriptionProcessing.Repository
 
         }
 
-        public void UpdatProduct(ProductModel model)
+        public void UpdateProduct(ProductModel model)
         {
-            var dbobject = _DBContext.Products.FirstOrDefault(x => x.IdProduct == model.IdProduct);
+            Product dbobject = _DBContext.Products.FirstOrDefault(x => x.IdProduct == model.IdProduct);
             if (dbobject != null)
             {
                 dbobject.IdProduct = model.IdProduct;
@@ -80,6 +82,7 @@ namespace PrescriptionProcessing.Repository
                 dbobject.ActiveIngredients = model.ActiveIngredients;
                 dbobject.PriceUnit = model.PriceUnit;
                 dbobject.Stock = model.Stock;
+                dbobject.Bbd = model.Bbd;
 
                 _DBContext.SaveChanges();
             }

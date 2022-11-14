@@ -1,0 +1,50 @@
+﻿@model IEnumerable<PrescriptionProcessing.Models.OrderModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+         
+            <th>
+                @Html.DisplayNameFor(model => model.PrescriptionNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IssuedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Details)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.PrescriptionNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IssuedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Details)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {  id=item.IdOrder  }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.IdOrder }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.IdOrder })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

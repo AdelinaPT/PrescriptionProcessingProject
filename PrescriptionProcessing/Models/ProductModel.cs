@@ -10,7 +10,7 @@ namespace PrescriptionProcessing.Models
         public decimal PriceUnit { get; set; }
         public int Stock { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy")]
+        [DisplayFormat(DataFormatString = "{0:d}")]
         [DataType(DataType.Date)]
         public DateTime Bbd { get; set; }
     }

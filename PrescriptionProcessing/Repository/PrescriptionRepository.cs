@@ -23,8 +23,7 @@ namespace PrescriptionProcessing.Repository
             if (dbobject != null)
             {
                 model.IdPrescription = dbobject.IdPrescription;
-                model.IdEmployee = dbobject.IdEmployee;
-                model.IdOrder = dbobject.IdOrder;
+
                 model.Details = dbobject.Details;
                 model.Status = dbobject.Status;
 
@@ -38,8 +37,7 @@ namespace PrescriptionProcessing.Repository
             if (model != null)
             {
                 dbobject.IdPrescription = model.IdPrescription;
-                dbobject.IdEmployee = model.IdEmployee;
-                dbobject.IdOrder = model.IdOrder;
+                
                 dbobject.Details = model.Details;
                 dbobject.Status = model.Status;
 
@@ -76,8 +74,7 @@ namespace PrescriptionProcessing.Repository
             if (dbobject != null)
             {
                 dbobject.IdPrescription = model.IdPrescription;
-                dbobject.IdEmployee = model.IdEmployee;
-                dbobject.IdOrder = model.IdOrder;
+            
                 dbobject.Details = model.Details;
                 dbobject.Status = model.Status;
 

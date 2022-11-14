@@ -16,6 +16,7 @@ namespace PrescriptionProcessing.Controllers
         }
 
         // GET: EmployeeController
+        
         public ActionResult Index()
         {
             var list = _employeeRepository.GetAllEmployees();
@@ -25,7 +26,8 @@ namespace PrescriptionProcessing.Controllers
         // GET: EmployeeController/Details/5
         public ActionResult Details(Guid id)
         {
-            return View();
+            var model = _employeeRepository.GetEmployeeById(id);
+            return View("DetailsEmployee", model);
         }
 
         // GET: EmployeeController/Create
@@ -41,7 +43,8 @@ namespace PrescriptionProcessing.Controllers
         {
             try
             {
-                var model = new EmployeeModel();
+                Models.EmployeeModel model = new Models.EmployeeModel();
+
                 var task = TryUpdateModelAsync(model);
                 task.Wait();
                 if(task.Result)
@@ -49,7 +52,7 @@ namespace PrescriptionProcessing.Controllers
                     _employeeRepository.InsertEmployee(model);
                 }
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index"); 
             }
             catch
             {

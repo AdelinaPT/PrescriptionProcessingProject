@@ -1,0 +1,60 @@
+﻿@model IEnumerable<PrescriptionProcessing.Models.PrescriptionModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+@*            <th>
+                @Html.DisplayNameFor(model => model.IdPrescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdEmployee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdOrder)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Details)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+@*            <td>
+                @Html.DisplayFor(modelItem => item.IdPrescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEmployee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdOrder)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Details)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.IdPrescription }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.IdPrescription }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.IdPrescription })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
