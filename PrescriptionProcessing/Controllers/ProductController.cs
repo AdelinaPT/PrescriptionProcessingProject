@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PrescriptionProcessing.Data;
 using PrescriptionProcessing.Models;
@@ -6,6 +7,7 @@ using PrescriptionProcessing.Repository;
 
 namespace PrescriptionProcessing.Controllers
 {
+    [Authorize(Roles = "Admin, Farmacist")]
     public class ProductController : Controller
     {
         private ProductRepository _productRepository;

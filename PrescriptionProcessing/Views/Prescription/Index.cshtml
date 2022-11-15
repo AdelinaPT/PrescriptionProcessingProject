@@ -50,10 +50,16 @@
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                    @Html.ActionLink("Edit", "Edit", new { id=item.IdPrescription }) |
+                @if(User.IsInRole("Farmacist") || User.IsInRole("Asistent"))
+                    {
+                    @Html.ActionLink("Edit", "Edit", new { id=item.IdPrescription }) 
+                    }|
                     @Html.ActionLink("Details", "Details", new { id=item.IdPrescription }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.IdPrescription })
-            </td>
+                @if (User.IsInRole("Farmacist") || User.IsInRole("Asistent"))
+                    {
+                        @Html.ActionLink("Delete", "Delete", new { id=item.IdPrescription })
+                    }
+                </td>
         </tr>
 }
     </tbody>

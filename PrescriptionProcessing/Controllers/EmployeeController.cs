@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PrescriptionProcessing.Data;
 using PrescriptionProcessing.Models;
@@ -6,8 +7,10 @@ using PrescriptionProcessing.Repository;
 
 namespace PrescriptionProcessing.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class EmployeeController : Controller
     {
+        
         private EmployeeRepository _employeeRepository;
 
         public EmployeeController(ApplicationDbContext dbcontext)

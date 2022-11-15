@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PrescriptionProcessing.Data;
 using PrescriptionProcessing.Models;
@@ -6,8 +7,10 @@ using PrescriptionProcessing.Repository;
 
 namespace PrescriptionProcessing.Controllers
 {
+    [Authorize(Roles = "User, Farmacist, Asistent, Admin")]
     public class OrderController : Controller
     {
+        
         private OrderRepository _orderRepository;
 
         public OrderController(ApplicationDbContext dbContext)
