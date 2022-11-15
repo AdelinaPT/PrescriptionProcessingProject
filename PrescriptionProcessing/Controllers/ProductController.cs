@@ -30,6 +30,7 @@ namespace PrescriptionProcessing.Controllers
         }
 
         // GET: ProductController/Create
+        [Authorize(Roles = "Farmacist")]
         public ActionResult Create()
         {
             return View("CreateProduct");
@@ -38,6 +39,8 @@ namespace PrescriptionProcessing.Controllers
         // POST: ProductController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+
+        
         public ActionResult Create(IFormCollection collection)
         {
             try
