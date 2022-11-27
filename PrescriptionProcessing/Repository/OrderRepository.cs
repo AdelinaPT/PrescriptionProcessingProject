@@ -25,9 +25,11 @@ namespace PrescriptionProcessing.Repository
             {
                 model.IdOrder = dbobject.IdOrder;
                 model.PrescriptionNumber = dbobject.PrescriptionNumber;
-                model.IssuedBy = dbobject.IssuedBy;
+                model.PatientName = dbobject.PatientName;
                 model.Details = dbobject.Details;
-
+                model.IssuedDate = dbobject.IssuedDate;
+                model.Status = dbobject.Status;
+                model.PickedUpBy = dbobject.PickedUpBy;
             }
             return model;
         }
@@ -39,8 +41,11 @@ namespace PrescriptionProcessing.Repository
             {
                 dbobject.IdOrder = model.IdOrder;
                 dbobject.PrescriptionNumber = model.PrescriptionNumber;
-                dbobject.IssuedBy = model.IssuedBy;
+                dbobject.PatientName = model.PatientName;
                 dbobject.Details = model.Details;
+                dbobject.IssuedDate = model.IssuedDate;
+                dbobject.Status = model.Status;
+                dbobject.PickedUpBy = model.PickedUpBy;
 
             }
             return dbobject;
@@ -76,8 +81,11 @@ namespace PrescriptionProcessing.Repository
             {
                 dbobject.IdOrder = model.IdOrder;
                 dbobject.PrescriptionNumber = model.PrescriptionNumber;
-                dbobject.IssuedBy = model.IssuedBy;
+                dbobject.PatientName = model.PatientName;
                 dbobject.Details = model.Details;
+                dbobject.IssuedDate = model.IssuedDate;
+                dbobject.Status = model.Status;
+                dbobject.PickedUpBy = model.PickedUpBy;
 
                 _DBContext.SaveChanges();
             }

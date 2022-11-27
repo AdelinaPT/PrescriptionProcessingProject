@@ -26,6 +26,8 @@ namespace PrescriptionProcessing.Repository
 
                 model.Details = dbobject.Details;
                 model.Status = dbobject.Status;
+                model.PickUpDate = dbobject.PickUpDate;
+                model.Cost = dbobject.Cost;
 
             }
             return model;
@@ -36,10 +38,12 @@ namespace PrescriptionProcessing.Repository
             var dbobject = new Prescription();
             if (model != null)
             {
-                dbobject.IdPrescription = model.IdPrescription;
+                dbobject.IdPrescription = model.IdPrescription; 
                 
                 dbobject.Details = model.Details;
                 dbobject.Status = model.Status;
+                dbobject.PickUpDate = model.PickUpDate;
+                dbobject.Cost = model.Cost;
 
             }
             return dbobject;
@@ -73,10 +77,12 @@ namespace PrescriptionProcessing.Repository
             var dbobject = _DBContext.Prescriptions.FirstOrDefault(x => x.IdPrescription == model.IdPrescription);
             if (dbobject != null)
             {
-                dbobject.IdPrescription = model.IdPrescription;
-            
+                dbobject.IdPrescription = model.IdPrescription;     
+                
                 dbobject.Details = model.Details;
                 dbobject.Status = model.Status;
+                dbobject.PickUpDate = model.PickUpDate;
+                dbobject.Cost = model.Cost;
 
                 _DBContext.SaveChanges();
             }

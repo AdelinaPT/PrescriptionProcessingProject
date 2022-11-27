@@ -10,6 +10,7 @@ namespace PrescriptionProcessing.Models.DBObjects
         public string Details { get; set; } = null!;
 
         public string Status { get; set; } = null!;
-
+        public DateTime? PickUpDate { get; set; }
+        public decimal? Cost { get; set; }
     }
 }

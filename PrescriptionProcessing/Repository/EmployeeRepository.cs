@@ -25,7 +25,10 @@ namespace PrescriptionProcessing.Repository
                 model.IdEmployee = dbobject.IdEmployee;
                 model.Name = dbobject.Name;
                 model.Position = dbobject.Position;
-                
+                model.DateStarted = dbobject.DateStarted;
+                model.EndDate = dbobject.EndDate;
+                model.JobDescription = dbobject.JobDescription;
+
             }
             return model;
         }
@@ -38,7 +41,9 @@ namespace PrescriptionProcessing.Repository
                 dbobject.IdEmployee = model.IdEmployee;
                 dbobject.Name = model.Name;
                 dbobject.Position = model.Position;
-                
+                dbobject.DateStarted = model.DateStarted;
+                dbobject.EndDate = model.EndDate;
+                dbobject.JobDescription = model.JobDescription;
             }
             return dbobject;
         }
@@ -74,7 +79,10 @@ namespace PrescriptionProcessing.Repository
                 dbobject.IdEmployee = model.IdEmployee;
                 dbobject.Name = model.Name;
                 dbobject.Position = model.Position;
-                
+                dbobject.DateStarted = model.DateStarted;
+                dbobject.EndDate = model.EndDate;
+                dbobject.JobDescription = model.JobDescription;
+
                 _DBContext.SaveChanges();
             }
 

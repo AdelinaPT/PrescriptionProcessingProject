@@ -10,19 +10,26 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-
-
 <table class="table">
     <thead>
         <tr>
-        @*    <th>
+            <th>
                 @Html.DisplayNameFor(model => model.IdEmployee)
-            </th>*@
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Position)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateStarted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobDescription)
             </th>
             <th></th>
         </tr>
@@ -30,9 +37,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-          @*  <td>
+            <td>
                 @Html.DisplayFor(modelItem => item.IdEmployee)
-            </td>*@
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -40,12 +47,20 @@
                 @Html.DisplayFor(modelItem => item.Position)
             </td>
             <td>
-                    @Html.ActionLink("Edit", "Edit", new { id=item.IdEmployee }) |
-                    @Html.ActionLink("Details", "Details", new { id=item.IdEmployee }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.IdEmployee })
+                @Html.DisplayFor(modelItem => item.DateStarted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobDescription)
+            </td>
+            <td>
+                    @Html.ActionLink("Edit", "Edit", new {  id=item.IdEmployee  }) |
+                    @Html.ActionLink("Details", "Details", new {  id=item.IdEmployee  }) |
+                    @Html.ActionLink("Delete", "Delete", new {  id=item.IdEmployee  })
             </td>
         </tr>
 }
     </tbody>
 </table>
-
